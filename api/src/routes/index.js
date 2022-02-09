@@ -15,12 +15,12 @@ const router = Router();
 router.get("/videogames", async (req, res) => {
     let name = req.query.name;
     try{
-        const videogamesByNameApi = await getApiVideogamesbyName();
         const allDbVideogames = await getDbVideogames();
-        const paginadoVideogames = await getAllVideogames()
+        const paginadoVideogames = await getAllVideogames();
         if(name){
-            name = name.toLowerCase()
-            const videogamesByNameDb = allDbVideogames.filter(e => e.name.toLowerCase().includes(name))
+            name = name.toLowerCase();
+            const videogamesByNameApi = await getApiVideogamesbyName(name);
+            let videogamesByNameDb = allDbVideogames.filter(e => e.name.toLowerCase().includes(name))
             const allVideogamesbyName = videogamesByNameDb.concat(videogamesByNameApi)
             allVideogamesbyName ?
             res.status(200).send(allVideogamesbyName)

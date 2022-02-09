@@ -1,0 +1,42 @@
+.background {
+    background-image: url("https://www.legaltoday.com/wp-content/uploads/2021/03/videojuegos.jpg");
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    overflow: hidden;
+    height: 100%; 
+    position:fixed  
+}
+.container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+.title {
+    color: #e2eafc;
+    flex-direction: column;
+    font-family: Helvetica;
+    font-size: 35px;
+    text-align: center;
+}
+.button {
+    background-color: #0a1128 ;
+    flex-direction: column;
+    color: #e2eafc;
+    font-size: 20px;
+    font-family: Helvetica;
+    border-radius: 30px;
+    border: #e2eafc solid 3px;
+    padding: 20px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #e2eafc;
+    color: #0a1128;
+    transition-delay: 0.2s;
+    transition: 0.8s;
+    border: #0a1128 solid 3px;
+}

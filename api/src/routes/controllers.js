@@ -64,7 +64,6 @@ const getAllVideogames = async () => {
 
 const searchByIdApi = async (id) => {
     const videogame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
-    console.log("HOLAAAAAAAAAAAA", videogame)
     const infoId = {
         name: videogame.data.name,
         released: videogame.data.released,

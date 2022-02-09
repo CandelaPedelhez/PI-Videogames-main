@@ -1,0 +1,26 @@
+h1{
+    color: #e2eafc;
+    font-family: Helvetica;
+}
+.background {
+    background-image: url("https://www.legaltoday.com/wp-content/uploads/2021/03/videojuegos.jpg");
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    overflow: hidden;
+    height: 100%; 
+    position:fixed;
+}
+.blur {
+    backdrop-filter: blur(5px);
+    width: 100%;
+    height: 100%; 
+}
+a{
+    color: #e2eafc;
+    font-family: Helvetica;
+    font-size: 15px;
+    position: relative;
+    top: -1.5%;
+}
