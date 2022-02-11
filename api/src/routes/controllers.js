@@ -1,4 +1,3 @@
-const { Router } = require('express');
 const axios = require('axios');
 require("dotenv").config();
 const { Videogame, Genres } = require('../db');
@@ -87,6 +86,12 @@ const searchByIdAtDB = async (id) => {
         }
     })
     return videogame
+}
+
+const getPlatforms = () => {
+    const platformsAPi = await getApi100Videogames();
+    const platforms = platformsAPi.map(e => e.platforms);
+    return platforms
 }
 
 module.exports = { getAllVideogames, searchByIdApi, searchByIdAtDB, getApiVideogamesbyName, getDbVideogames }

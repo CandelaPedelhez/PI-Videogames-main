@@ -3,6 +3,7 @@ const initialState = {
     videogames: [],
     genres: [],
     details: [],
+    platforms: [],
 }
 
 function rootReducer(state = initialState, action) {
@@ -11,29 +12,28 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 videogames: action.payload, /* este para ir poniendole los filtros */
-                allVideogames: action.payload,
-                details: []
+                allVideogames: action.payload, /* FUNCIONA */
             }
         case "GET_VIDEOGAMES_BY_NAME":
             return {
                 ...state,
-                videogames: action.payload
+                videogames: action.payload /* FUNCIONA */
             }
         case "GET_GENRES":
             return {
-                ...state,
+                ...state, /* FUNCIONA */
                 genres: action.payload
             }
-        case "POST VIDEOGAME":
+        case "POST_VIDEOGAME":
             return {
                 ...state
             }
         case "GET_DETAILS":
             return {
-                ...state,
+                ...state, /* FUNCIONA */
                 details: action.payload
             }
-        case "FILTER_BY_GENRE":
+/*         case "FILTER_BY_GENRE":
             const videogames = state.videogames
             const genrefiltered = []
             videogames.forEach(e => {
@@ -154,7 +154,7 @@ function rootReducer(state = initialState, action) {
                     ...state,
                     allVideogames
                 }
-            }
+            } */
         default:
             return state
     }

@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
     },
 
     platforms: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false
     },
 

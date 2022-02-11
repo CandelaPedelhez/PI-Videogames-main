@@ -1,0 +1,98 @@
+.background{
+    background-color: #0a1128;
+    background-size: cover;
+    color:#e2eafc;
+    font-family: Helvetica;
+    font-size: 17px;
+}
+.button1{
+    background-color: #0a1128 ;
+    flex-direction: column;
+    color: #e2eafc;
+    font-size: 15px;
+    font-family: Helvetica;
+    border-radius: 30px;
+    border: #e2eafc solid 3px;
+    padding: 10px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin: 10px;
+}
+    
+.button1:hover {
+    background-color: #e2eafc;
+    color: #0a1128;
+    transition-delay: 0.2s;
+    transition: 0.8s;
+    border: #0a1128 solid 3px;
+}
+.button2{
+    background-color: #0a1128 ;
+    flex-direction: column;
+    color: #e2eafc;
+    font-size: 15px;
+    font-family: Helvetica;
+    border-radius: 30px;
+    border: #e2eafc solid 3px;
+    padding: 10px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin: 50px;
+}
+    
+.button2:hover {
+    background-color: #e2eafc;
+    color: #0a1128;
+    transition-delay: 0.2s;
+    transition: 0.8s;
+    border: #0a1128 solid 3px;
+}
+.platforms{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    justify-items: start;
+    padding-left: 63px;
+    padding-top: 15px;
+    padding-bottom: 40px;
+    font-size: 15px;
+    font-style: italic;
+}
+h1{
+    margin: 0px;
+    padding: 17px;
+}
+.div{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: start;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 25px;
+}
+label{
+    padding: 10px;
+}
+.div2{
+    display: flex;
+    align-items: center;
+    padding: 20px
+}
+.select{
+    border-width: 2px;
+    border-color: #0a1128;
+    border-radius: 6px;
+    font-size: 13px;
+}
+form{
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-origin: padding-box;
+    background-color: #e2eafc;
+    border-radius: 21px;
+    color: #0a1128;
+    opacity: 0.8;
+}
+.vacio{
+    padding: 20px;
+}

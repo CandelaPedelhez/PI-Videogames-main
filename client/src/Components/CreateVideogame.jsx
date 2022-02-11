@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { postVideogame , getGenres } from "../Actions/index.js";
+import { postVideogame, getGenres } from "../Actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "../Styles/CreateVideogame.module.css"
 
 function validate(input) {
     let errors = {};
@@ -22,97 +23,9 @@ export default function CreateVideogame() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const genres = useSelector((state) => state.genres);
+    const platforms = useSelector((state) => state.platforms)
     const [errors, setErrors] = useState({});
-
-
-    const [input, setInput] = useState({ /* input = estado local */
-        name: "",
-        description: "",
-        image: "https://media.gcflearnfree.org/content/5ccc48c7e5c6c4116cbd9df7_05_03_2019/consolasjuegos-01_xl.png",
-        released: "",
-        rating: 0,
-        genres: [],
-        platforms: [],
-    })
-
-    function handleChange(e) {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        });
-        setErrors(validate({
-            ...input,
-            [e.target.name]: e.target.value
-        }))
-    }
-
-    useEffect(() => {
-        dispatch(getGenres());
-    }, [dispatch]);
-
-    function handleSelect(e) {
-        setInput((input) => {
-            if(!input.genres.includes(e.target.value)){
-                return{
-                    ...input,
-                    genres: [...input.genres, e.target.value]
-                }
-            }
-            else{
-                return{
-                    ...input,
-                    genres
-                }
-            }
-        })
-    }
-
-    function handleDelete(e, d) {
-        e.preventDefault();
-        setInput({
-            ...input,
-            genres: input.genres.filter(genre => genre !== d),
-        });
-    }
-
-
-    function handleSubmit(e) {
-        if (input.name && input.description && input.rating <= 5) {
-            e.preventDefault();
-            dispatch(postVideogame(input));
-            setInput({
-                name: "",
-                description: "",
-                image: "https://media.gcflearnfree.org/content/5ccc48c7e5c6c4116cbd9df7_05_03_2019/consolasjuegos-01_xl.png",
-                released: "",
-                rating: 0,
-                genres: [],
-                platforms: [],
-            });
-            alert("Videogame created");
-            navigate("/home");
-        } else {
-            e.preventDefault();
-            alert("You should check name, description and rating fields!");
-        }
-    }
-
-    function handleCheckbox(e){
-        if(!input.platforms.includes(e.target.value)){
-            return{
-                ...input,
-                platforms: [...input.platforms, e.target.value]
-            }
-        } else{
-            let index = input.platforms.indexOf(e.target.value);
-            return{
-                ...input,
-                platforms: input.platforms.filter((p , i) => { /* p = parameter que no hay, i = index */
-                    return i !== index;
-                })
-            }
-        }
-    }
+    const [isChecked, setIsChecked] = useState(platforms.fill(false))
 
     let allPlatforms = [
         "PC",
@@ -165,41 +78,161 @@ export default function CreateVideogame() {
         "Jaguar",
         "Game Gear",
         "Neo Geo",
-      ];
+    ];
+
+    const [input, setInput] = useState({ /* input = estado local */
+        name: "",
+        description: "",
+        image: "https://media.gcflearnfree.org/content/5ccc48c7e5c6c4116cbd9df7_05_03_2019/consolasjuegos-01_xl.png",
+        released: "",
+        rating: 0,
+        genres: [],
+        platforms: [],
+    })
+
+    useEffect(() => {
+        dispatch(getGenres());
+    }, [dispatch]);
+
+    function handleChange(e) {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        });
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+
+    function handleSelect(e) {
+        setInput((input) => {
+            if (!input.genres.includes(e.target.value)) {
+                return {
+                    ...input,
+                    genres: [...input.genres, e.target.value]
+                }
+            }
+            else {
+                return {
+                    ...input
+                }
+            }
+        })
+    }
+
+    function handleDelete(e, d) {
+        e.preventDefault();
+        setInput({
+            ...input,
+            genres: input.genres.filter(genre => genre !== d),
+        });
+    }
+
+
+    function handleSubmit(e) {
+        if (input.name && input.description && input.rating <= 5) {
+            e.preventDefault();
+            dispatch(postVideogame(input));
+            alert("Videogame created");
+            setInput({
+                name: "",
+                description: "",
+                image: "https://media.gcflearnfree.org/content/5ccc48c7e5c6c4116cbd9df7_05_03_2019/consolasjuegos-01_xl.png",
+                released: "",
+                rating: 0,
+                genres: [],
+                platforms: [],
+            });
+            console.log(input)
+            navigate("/home");
+        } else {
+            e.preventDefault();
+            alert("You should check name, description and rating fields!");
+        }
+    }
+
+    function handleCheckbox(e) {
+        const index = e.target.id
+        setIsChecked(!isChecked[index]);
+        if(e.target.checked === true){
+            if(!input.platforms.includes(e.target.value)){
+                setInput({
+                    ...input,
+                    platforms: [...input.platforms, e.target.value]
+                })
+            }
+        }
+        if(e.target.checked === false){
+            let platforms = input.platforms.filter(d => d !== e.target.value);
+            setInput({
+                ...input,
+                platforms
+            })
+        }
+    }
 
     return (
-        <div>
-            <Link to='/home'><button>Back</button></Link>
+        <div className={styles.background}>
+            <Link to='/home'><button className={styles.button1}>Back</button></Link>
             <h1>Create your own videogame</h1>
+            <div>
+                <h5><b>Those with * are obligatory</b></h5>
+            </div>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                    <label>Name *</label>
-                    <input type="text" value={input.name} name="name" onChange={(e) => handleChange(e)} />
-                    {errors.name && (
-                        <p>{errors.name}</p>
-                    )}
+                <div className={styles.div}>
+                    <div className={styles.div2}>
+                        <label>Name *</label>
+                        <input type="text" value={input.name} name="name" onChange={(e) => handleChange(e)} />
+                        {errors.name && (
+                            <p>{errors.name}</p>
+                        )}
+                    </div>
+                    <div className={styles.div2}>
+                        <label>Description *</label>
+                        <textarea rows={5} type="text" value={input.description} name="description" onChange={(e) => handleChange(e)} />
+                        {errors.description && (
+                            <p>{errors.description}</p>
+                        )}
+                    </div>
+                    <div className={styles.div2}>
+                        <label>Rating</label>
+                        <input type="number" value={input.rating} name="rating" onChange={(e) => handleChange(e)} />
+                        {errors.rating && (
+                            <p>{errors.rating}</p>
+                        )}
+                    </div>
+                    <div className={styles.div2}>
+                        <label>Released</label>
+                        <input type="text" value={input.released} name="released" onChange={(e) => handleChange(e)} />
+                    </div>
                 </div>
                 <div>
-                    <label>Description *</label>
-                    <textarea rows={5} type="text" value={input.description} name="description" onChange={(e) => handleChange(e)} />
-                    {errors.description && (
-                        <p>{errors.description}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Rating</label>
-                    <input type="number" value={input.rating} name="rating" onChange={(e) => handleChange(e)} />
-                    {errors.rating && (
-                        <p>{errors.rating}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Released</label>
-                    <input type="text" value={input.released} name="released" onChange={(e) => handleChange(e)} />
+                    <label>Platforms</label>
+                    <div className={styles.platforms}>
+                        {
+                            allPlatforms.map((platform, index) => {
+                                return (
+                                    <div key={index}>
+                                        <input
+                                        id={`${index}`}
+                                            checked= {isChecked[index]}
+                                            type="checkbox"
+                                            name={platform}
+                                            value={platform}
+                                            onChange={(e) => handleCheckbox(e)}
+                                        />
+                                        <span>{platform}</span>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
                 </div>
                 <div >
                     <label>Genres</label>
-                    <select onChange={(e) => handleSelect(e)}>
+                    <select className={styles.select} onChange={(e) => handleSelect(e)}>
                         {genres.map((genres) => {
                             return <option value={genres.name}>{genres.name}</option>
                         })}
@@ -214,29 +247,9 @@ export default function CreateVideogame() {
                         }
                     </div>
                 </div>
-                <div>
-                    <label>Platforms</label>
-                    {
-                        allPlatforms.map((platform, index) => {
-                            return (
-                              <div key={index}>
-                                <span>{platform}</span>
-                                <input
-                                  type="checkbox"
-                                  name={platform}
-                                  value={platform}
-                                  onChange={(e) => handleCheckbox(e)}
-                                />
-                              </div>
-                            );
-                          })
-                    }
-                </div>
-                <button type="submit">Create recipe</button>
+                <button className={styles.button2} type="submit">Create recipe</button>
             </form>
-            <div>
-                <h5><b>Those with * are obligatory</b></h5>
-            </div>
+            <div className={styles.vacio}></div>
         </div>
     )
 }

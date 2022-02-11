@@ -1,16 +1,13 @@
 h1{
     color: #e2eafc;
     font-family: Helvetica;
+    margin-bottom: 15px;
 }
-.background {
-    background-image: url("https://www.legaltoday.com/wp-content/uploads/2021/03/videojuegos.jpg");
-    background-position: center; 
+body{
+    background: no-repeat url('https://www.legaltoday.com/wp-content/uploads/2021/03/videojuegos.jpg');
+    background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    overflow: hidden;
-    height: 100%; 
-    position:fixed;
+    background-attachment: fixed;
 }
 .blur {
     backdrop-filter: blur(5px);
@@ -23,4 +20,46 @@ a{
     font-size: 15px;
     position: relative;
     top: -1.5%;
+    text-decoration: none;
+}
+.button {
+    background-color:  #e2eafc;
+    flex-direction: column;
+    color: #0a1128;
+    font-size: 13px;
+    font-family: Helvetica;
+    border-radius: 6px;
+    border: #e2eafc solid 3px;
+    padding: 4px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #0a1128 ;
+    color:  #e2eafc;
+    transition-delay: 0.2s;
+    transition: 0.8s;
+    border: #e2eafc solid 3px;
+}
+.div{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 1.5%;
+}
+.select{
+    border-width: 2px;
+    border-color: #0a1128;
+    border-radius: 6px;
+    font-size: 13px;
+}
+.conteiner{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 2rem;
+    align-items: start;
+}
+.link{
+    margin-bottom: 13px;
 }

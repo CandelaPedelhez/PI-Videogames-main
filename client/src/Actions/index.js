@@ -37,10 +37,10 @@ export function getGenres(payload){
     }
 }
 
-export function postVideogame(){
+export function postVideogame(payload){
     return async function(){
         try{
-            var json = await axios.post("http://localhost:3001/videogame")
+            var json = await axios.post("http://localhost:3001/videogame", payload)
             return {
                 type: "POST_VIDEOGAME",
                 json
@@ -65,7 +65,7 @@ export function getDetails(payload){
     }
 }
 
-export function filterByGenre(payload){
+/* export function filterByGenre(payload){
     return{
         type: "FILTER_BY_GENRE",
         payload
@@ -91,4 +91,4 @@ export function orderByRating(payload){
         type: "ORDER_BY_RATING",
         payload
     }
-}
+} */

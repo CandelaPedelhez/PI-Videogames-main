@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from "../Styles/Paginado.module.css"
 
 export default function Paginado({videogamesPerPage, videogames, paginado, handlePrevNext}){
     const pageNumbers = []
@@ -8,7 +9,7 @@ export default function Paginado({videogamesPerPage, videogames, paginado, handl
     }
 
     return(
-        <nav className='paginador'>
+        <nav className={styles.paginado}>
             <button name= "prev" onClick={e => handlePrevNext(e)}>{'<'}</button>
             <ul>
                 {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllVideogames } from "../Actions";
+import { getAllVideogames , filterByDborApi , filterByGenre , orderByName, orderByRating } from "../Actions";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar"
 import Paginado from "./Paginado";
@@ -19,14 +19,15 @@ export default function Home() {
     const [order, setOrder] = useState("");
     const lastPage = Math.ceil(videogames.length / 15)
 
-    useEffect(() => {
-        dispatch(getAllVideogames())
-    }, [dispatch]) /* el [] es la dependencia, para que no se llame en loop */
-
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
+
+    useEffect(() => {
+        dispatch(getAllVideogames())
+    }, [dispatch]) /* el [] es la dependencia, para que no se llame en loop */
+
 
     const handlePrevNext = e => {
         e.preventDefault();
@@ -50,31 +51,58 @@ export default function Home() {
     }
 
     function handleClick(e) {
-        e.preventDafault();
+        e.preventDefault();
         dispatch(getAllVideogames());
     }
+/* 
+    function handleSortName(e){
+        e.preventDefault();
+        dispatch(orderByName(e.target.value));
+        setCurrentPage(1);
+        setOrder(`Order ${e.target.value}`)
+        console.log("HOLAAAAAAAA", e.target.value)
+    }
+
+    function handleSortRating(e){
+        e.preventDefault();
+        dispatch(orderByRating(e.target.value));
+        setCurrentPage(1);
+        setOrder(`Order ${e.target.value}`)
+    }
+
+    function handleFilterGenres(e){
+        e.preventDefault();
+        dispatch(filterByGenre(e.target.value));
+    }
+
+    function handleFilterDbApi(e){
+        e.preventDefault();
+        dispatch(filterByDborApi(e.target.value));
+    } */
 
     return (
-        <div className={styles.background}>
+        <div>
             <div className={styles.blur}>
                 <h1>Let's play</h1>
-                <Link to="/videogame" className="link">Create your own Videogame!</Link>
+                <div  className={styles.link}>
+                <Link to="/videogame">Create your own Videogame!</Link>
+                </div>
                 <div>
                     <SearchBar />
                 </div>
-                <div>
-                    <select /* onChange={e => handleSortName(e)} */>
+                <div className={styles.div}>
+                    <select className={styles.select} /* onChange={e => handleSortName(e)} */>
                         <option value="">Order by name</option>
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
-                    <select /* onChange={e => handleSortScore(e)} */>
+                    <select className={styles.select} /* onChange={e => handleSortRating(e)} */>
                         <option value="">Order by Score</option>
                         <option value="higher rating">Higher Rating</option>
                         <option value="lower rating">Lower Rating</option>
                     </select>
                     {
-                        <select /* onChange={e => handleFilterDiets(e)} */>
+                        <select className={styles.select} /* onChange={e => handleFilterGenres(e)} */>
                             <option value="">Choose a genre</option>
                             <option value="Strategy">Strategy</option>
                             <option value="Adventure">Adventure</option>
@@ -97,14 +125,14 @@ export default function Home() {
                             <option value="Card">Card</option>
                         </select>
                     }
-                    <select /* onChange={e => handleSortScore(e)} */>
+                    <select className={styles.select} /* onChange={e => handleFilterDbApi(e)} */>
                         <option value="">Filter by origin</option>
                         <option value="created">Created</option>
                         <option value="existant">Existant</option>
                     </select>
-                </div>
-                <div>
-                    <button onClick={e => handleClick(e)}>Re-Load All videogames</button>
+                    <div>
+                        <button className={styles.button} onClick={e => handleClick(e)}>Re-Load All videogames</button>
+                    </div>
                 </div>
                 <div>
                     <Paginado
@@ -113,7 +141,7 @@ export default function Home() {
                         paginado={paginado}
                         handlePrevNext={handlePrevNext}
                     />
-                    <div>
+                    <div className={styles.conteiner}>
                         {
                             (currentVideogames) ? currentVideogames.map((e, index) => (
                                 <div key={index}>

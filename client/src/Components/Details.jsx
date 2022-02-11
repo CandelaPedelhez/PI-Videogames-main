@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails } from "../Actions/index";
 import { useEffect } from "react";
-
+import styles from "../Styles/Details.module.css"
 
 export default function Details() {
     const dispatch = useDispatch();
@@ -16,8 +16,8 @@ export default function Details() {
 
 
     return (
-        <div >
-            <div>
+        <div className={styles.background}>
+            <div className={styles.words}>
                 {
                     (myVideogame.length === 0) ?
                         <div >
@@ -25,28 +25,47 @@ export default function Details() {
                         </div>
                         :
                         <div>
-                            <h1 >{myVideogame.name}</h1>
-                            <img src={myVideogame.image} alt="" />
-                            <h3>Description</h3>
-                            <p >{myVideogame.description}</p>
-                            <h3>Genres</h3>
-                            <p >{ myVideogame.createdInDb ?
-                            myVideogame.genres.map(e => (<li>{e.name}</li>)) :
-                            myVideogame.genres.map(e => (<li>{e}</li>))}
-                            </p>
-                            <h3>Released</h3>
-                            <p >{myVideogame.released}</p>
-                            <h3 >Rating</h3>
-                            <p>{myVideogame.rating}</p>
-                            <h3 >Platforms</h3>
-                            {myVideogame.platforms.map(e => (<li>{e}</li>))}
+                            <h1 className={styles.h1}>{myVideogame.name}</h1>
+                            <img src={myVideogame.image} alt="" className={styles.img} />
+                            <div className={styles.segundoB}>
+                                <div className={styles.p}>
+                                    <h3 className={styles.h3}>Description</h3>
+                                    <p >{myVideogame.description}</p>
+                                </div>
+                                <div className={styles.div}>
+                                    <div>
 
+                                        <div>
+                                            <h3>Released</h3>
+                                            <p >{myVideogame.released}</p>
+                                            <div className={styles.div1}>
+                                                <h3>Genres</h3>
+                                                {myVideogame.createdInDb ?
+                                                    myVideogame.genres.map(e => (<li>{e.name}</li>)) :
+                                                    myVideogame.genres.map(e => (<li>{e}</li>))}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <h3>Rating</h3>
+                                            <p>{myVideogame.rating}</p>
+                                        </div>
+
+                                        <div className={styles.div1} >
+                                            <h3>Platforms</h3>
+                                            {myVideogame.platforms.map(e => (<li>{e}</li>))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                 }
             </div>
-            <div>
+            <div className={styles.div2}>
                 <Link to="/home">
-                    <button>Go back!</button>
+                    <button className={styles.button}>Go back!</button>
                 </Link>
             </div>
         </div>
