@@ -53,14 +53,14 @@ export default function Home() {
     function handleClick(e) {
         e.preventDefault();
         dispatch(getAllVideogames());
+        setCurrentPage(1);
     }
-/* 
+
     function handleSortName(e){
         e.preventDefault();
         dispatch(orderByName(e.target.value));
         setCurrentPage(1);
         setOrder(`Order ${e.target.value}`)
-        console.log("HOLAAAAAAAA", e.target.value)
     }
 
     function handleSortRating(e){
@@ -78,7 +78,8 @@ export default function Home() {
     function handleFilterDbApi(e){
         e.preventDefault();
         dispatch(filterByDborApi(e.target.value));
-    } */
+        setCurrentPage(1);
+    }
 
     return (
         <div>
@@ -91,18 +92,18 @@ export default function Home() {
                     <SearchBar />
                 </div>
                 <div className={styles.div}>
-                    <select className={styles.select} /* onChange={e => handleSortName(e)} */>
+                    <select className={styles.select} onChange={e => handleSortName(e)}>
                         <option value="">Order by name</option>
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
-                    <select className={styles.select} /* onChange={e => handleSortRating(e)} */>
-                        <option value="">Order by Score</option>
+                    <select className={styles.select} onChange={e => handleSortRating(e)}>
+                        <option value="">Order by Rating</option>
                         <option value="higher rating">Higher Rating</option>
                         <option value="lower rating">Lower Rating</option>
                     </select>
                     {
-                        <select className={styles.select} /* onChange={e => handleFilterGenres(e)} */>
+                        <select className={styles.select} onChange={e => handleFilterGenres(e)}>
                             <option value="">Choose a genre</option>
                             <option value="Strategy">Strategy</option>
                             <option value="Adventure">Adventure</option>
@@ -125,7 +126,7 @@ export default function Home() {
                             <option value="Card">Card</option>
                         </select>
                     }
-                    <select className={styles.select} /* onChange={e => handleFilterDbApi(e)} */>
+                    <select className={styles.select} onChange={e => handleFilterDbApi(e)}>
                         <option value="">Filter by origin</option>
                         <option value="created">Created</option>
                         <option value="existant">Existant</option>
