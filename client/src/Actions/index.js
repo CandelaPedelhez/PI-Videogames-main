@@ -37,6 +37,7 @@ export function getGenres(payload){
     }
 }
 
+
 export function postVideogame(payload){
     return async function(){
         try{
@@ -65,7 +66,7 @@ export function getDetails(payload){
     }
 }
 
-/* export function filterByGenre(payload){
+export function filterByGenre(payload){
     return{
         type: "FILTER_BY_GENRE",
         payload
@@ -91,4 +92,4 @@ export function orderByRating(payload){
         type: "ORDER_BY_RATING",
         payload
     }
-} */
+}
