@@ -14,7 +14,6 @@ export default function Details() {
         dispatch(getDetails(videogameId.id));
     }, [dispatch]) /* así accedemos al id del videogame que accedemos  */
 
-
     return (
         <div className={styles.background}>
             <div className={styles.words}>

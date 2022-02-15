@@ -4,20 +4,32 @@ const initialState = {
     genres: [],
     details: [],
     platforms: [],
+    searchByName: [],
+    filteredByGenre: [],
 }
+
+let filtroByGenre = false;
+let filtroByDbApi = false;
+let search = false;
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_ALL_VIDEOGAMES":
+            filtroByDbApi = false
+            filtroByGenre = false
+            search = false
             return {
                 ...state,
                 videogames: action.payload, /* este para ir poniendole los filtros */
                 allVideogames: action.payload, /* FUNCIONA */
+                details: []
             }
         case "GET_VIDEOGAMES_BY_NAME":
+            search = true
             return {
                 ...state,
-                videogames: action.payload /* FUNCIONA */
+                videogames: action.payload, /* FUNCIONA */
+                searchByName: action.payload
             }
         case "GET_GENRES":
             return {
@@ -36,6 +48,7 @@ function rootReducer(state = initialState, action) {
         case "FILTER_BY_GENRE": /* FUNCIONA */
             const videogames = state.videogames
             const genrefiltered = []
+            filtroByGenre = true
             videogames.forEach(e => {
                 if (e.genres.includes(action.payload)) {
                     genrefiltered.push(e)
@@ -45,10 +58,12 @@ function rootReducer(state = initialState, action) {
                 return {
                     ...state,
                     videogames: genrefiltered,
+                    filteredByGenre: genrefiltered
                 }
             } break;
 
         case "FILTER_BY_DB_OR_API":
+            filtroByDbApi = true
             if (action.payload === "") {
                 return {
                     ...state,

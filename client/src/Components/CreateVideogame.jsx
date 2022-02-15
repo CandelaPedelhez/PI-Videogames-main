@@ -247,7 +247,7 @@ export default function CreateVideogame() {
                         }
                     </div>
                 </div>
-                <button className={styles.button2} type="submit">Create recipe</button>
+                <button className={styles.button2} type="submit">Create videogame</button>
             </form>
             <div className={styles.vacio}></div>
         </div>

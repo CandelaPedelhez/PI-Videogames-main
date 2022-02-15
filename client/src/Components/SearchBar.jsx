@@ -15,11 +15,12 @@ export default function SearchBar(){
     function handleSubtmit(e){
         e.preventDefault()
         dispatch(getVideogamesByName(videogame))
+        setVideogame("");
     }
 
     return(
         <div className={styles.div}>
-            <input className={styles.input} type= "text" placeholder="Search..." onChange={(e) => handleInputChange(e)}/>
+            <input className={styles.input} type= "text" value={videogame} placeholder="Search..." onChange={(e) => handleInputChange(e)}/>
             <button className={styles.button} type="submit" onClick={(e) => handleSubtmit(e)}>Search</button>
         </div>
     )

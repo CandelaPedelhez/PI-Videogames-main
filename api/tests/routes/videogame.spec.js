@@ -21,4 +21,33 @@ describe('Videogame routes', () => {
       agent.get('/videogames').expect(200)
     );
   });
+
+
+  describe('GET /videogame/:id', () => {
+    it('GET response with 200 if it finds a videogame with the id provided', function () {
+        agent.get('/videogame/25')
+        .expect(function(res) {
+          expect(res.status).equal(200);
+        })
+      })
+  })
+  
+  describe('GET /videogames?name=', () => {
+    it('GET response with 200 if it finds a videogame with the name provided', function () {
+      agent.get('/videogames?name=grand')
+      .expect(function(res) {
+        expect(res.status).equal(200);
+      })
+    })
+  })
+  
+  describe('GET /genres', () => {
+    it('GET response with 200 if it finds the genres of the videogames', function () {
+      agent.get('/genres')
+      .expect(function(res) {
+        expect(res.status).equal(200);
+      })
+    })
+  })
+
 });
