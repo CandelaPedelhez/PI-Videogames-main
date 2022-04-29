@@ -11,11 +11,11 @@ import styles from "../Styles/Home.module.css"
 export default function Home() {
     const dispatch = useDispatch();
     const videogames = useSelector(state => state.videogames);
-    const [currentPage, setCurrentPage] = useState(1); /* seteamos la pagina actual */
-    const [videogamesPerPage, setVideogamesPerPage] = useState(15); /* guardamos cuántos personajes por página */
-    const indexOfLastVideogame = currentPage * videogamesPerPage; /* última receta de la página */
-    const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage /* acá nos da la primer receta de cada pag */
-    const currentVideogames = videogames.slice(indexOfFirstVideogame, indexOfLastVideogame);/* acá nos muestra todas las recetas de la página actual */
+    const [currentPage, setCurrentPage] = useState(1);
+    const [videogamesPerPage, setVideogamesPerPage] = useState(15); 
+    const indexOfLastVideogame = currentPage * videogamesPerPage; 
+    const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage 
+    const currentVideogames = videogames.slice(indexOfFirstVideogame, indexOfLastVideogame);
     const [order, setOrder] = useState("");
     const lastPage = Math.ceil(videogames.length / 15)
 
@@ -24,10 +24,9 @@ export default function Home() {
         setCurrentPage(pageNumber)
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
         dispatch(getAllVideogames())
-    }, [dispatch]) /* el [] es la dependencia, para que no se llame en loop */
-
+    }, [dispatch]) */ 
 
     const handlePrevNext = e => {
         e.preventDefault();
@@ -72,13 +71,14 @@ export default function Home() {
 
     function handleFilterGenres(e){
         e.preventDefault();
+        setCurrentPage(1);
         dispatch(filterByGenre(e.target.value));
     }
 
     function handleFilterDbApi(e){
         e.preventDefault();
-        dispatch(filterByDborApi(e.target.value));
         setCurrentPage(1);
+        dispatch(filterByDborApi(e.target.value));
     }
 
     return (
@@ -142,9 +142,11 @@ export default function Home() {
                         paginado={paginado}
                         handlePrevNext={handlePrevNext}
                     />
+                    {
+                        (currentVideogames.length > 0) ? 
                     <div className={styles.conteiner}>
                         {
-                            (currentVideogames) ? currentVideogames.map((e, index) => (
+                            currentVideogames.map((e, index) => (
                                 <div key={index}>
                                     <Link to={"/videogame/" + e.id}>
                                         <Card
@@ -156,9 +158,10 @@ export default function Home() {
                                     </Link>
                                 </div>
 
-                            )) : <p >Loading ...</p>
+                            ))
                         }
-                    </div>
+                    </div>  : <h2>Loading ...</h2>
+                    }
                 </div>
             </div>
 

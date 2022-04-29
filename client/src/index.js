@@ -8,7 +8,7 @@ import { store } from './Store/index'
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
+    <React.StrictMode> {/* problemas */}
       <App />
     </React.StrictMode>
   </Provider>,
